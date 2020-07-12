@@ -17,6 +17,8 @@ export class NgxCellSelectableDirective {
 
   @Input() columns: any[];
 
+  @Input() valueProp = 'binding';
+
   cls = 'eng-selected-cell';
 
   constructor(
@@ -104,7 +106,7 @@ export class NgxCellSelectableDirective {
       for (let j = minCellInex; j <= maxCellInex; j++ ) {
         if (!this.cellSelectionInfo.selectionSet.has(i + '-' + j)) {
           let value = '';
-          value = this.data[i][this.columns[j].binding];
+          value = this.data[i][this.columns[j][this.valueProp]];
           this.cellSelectionInfo.selection.push({id: i + '-' + j, value});
           this.cellSelectionInfo.selectionSet.add(i + '-' + j);
         }

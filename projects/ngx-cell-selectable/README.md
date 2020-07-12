@@ -48,18 +48,25 @@ And define the class to be rendered when you select the cells; e.g:
     }
 }
 ```
-Next, in your component `.ts`, add the three most important properties as the input properties of the directive, e.g:
+Next, in your component `.ts`, add the four most important properties as the input properties of the directive, e.g:
 ```
   cellSelectionInfo = new CellSelectionInfo();
 
-  columns = [];
+  columns = [
+    { binding: 'index', title: 'name' },
+    { binding: 'name', title: 'name' },
+    { binding: 'age', title: 'age' },
+    { binding: 'address', title: 'address' },
+  ];
 
   data = [];
+
+  valueProp = 'binding'
 ```
 and in component `.html`,
-Set these three properties to the table, e.g:
+Set these four properties to the table, e.g:
 ```
-  <table tabindex="-1" hidefocus="true" [ngxCellSelectable]="cellSelectionInfo" [data]="data"
+  <table tabindex="-1" hidefocus="true" [ngxCellSelectable]="cellSelectionInfo" [data]="data" [valueProp]="valueProp"
   [columns]="columns">
   ...
   </table>

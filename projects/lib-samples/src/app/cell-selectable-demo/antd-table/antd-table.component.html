@@ -1,4 +1,4 @@
-<nz-table #virtualTable tabindex="-1" hidefocus="true" [ngxCellSelectable]="cellSelectionInfo" [data]="listOfData"
+<nz-table #virtualTable tabindex="-1" hidefocus="true" [ngxCellSelectable]="cellSelectionInfo" [data]="listOfData" [valueProp]="'binding'"
   [columns]="columns" [nzVirtualItemSize]="54" [nzData]="listOfData" [nzVirtualForTrackBy]="trackByIndex"
   [nzFrontPagination]="false" [nzShowPagination]="false" [nzScroll]="{ x: '1200px', y: '240px' }">
   <thead>
