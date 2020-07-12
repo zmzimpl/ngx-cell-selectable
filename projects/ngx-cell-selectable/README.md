@@ -50,6 +50,9 @@ And define the class to be rendered when you select the cells; e.g:
 ```
 Next, in your component `.ts`, add the four most important properties as the input properties of the directive, e.g:
 ```
+import { CellSelectionInfo } from 'ngx-cell-selectable';
+
+...
   cellSelectionInfo = new CellSelectionInfo();
 
   columns = [
