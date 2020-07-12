@@ -1,24 +1,92 @@
-# NgxCellSelectable
+# ngx-cell-selectable
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
+An Angular directive makes table cells selectable and copyable.
 
-## Code scaffolding
+## Install
 
-Run `ng generate component component-name --project ngx-cell-selectable` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-cell-selectable`.
-> Note: Don't forget to add `--project ngx-cell-selectable` or else it will be added to the default project in your `angular.json` file. 
+You can get it on npm.
 
-## Build
+```bat
+npm install ngx-cell-selectable
+```
 
-Run `ng build ngx-cell-selectable` to build the project. The build artifacts will be stored in the `dist/` directory.
+Open your module file e.g `app.module.ts` and update **imports** array
 
-## Publishing
+```ts
+import { NgxCellSelectableModule } from 'ngx-cell-selectable';
+...
+imports: [
+...
+    NgxCellSelectableModule,
+...
+]
+```
 
-After building your library with `ng build ngx-cell-selectable`, go to the dist folder `cd dist/ngx-cell-selectable` and run `npm publish`.
+## Usage
 
-## Running unit tests
 
-Run `ng test ngx-cell-selectable` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To make the cells selectable, you must disable the default selection function, define class e.g:
+```
+.disable-select {
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 
-## Further help
+```
+And define the class to be rendered when you select the cells; e.g:
+```
+.eng-selected-cell {
+    background-color: #438eb9  !important;
+    color: #fff !important;
+    > * {
+        color: #fff !important;
+    }
+}
+```
+Next, in your component `.ts`, add the three most important properties as the input properties of the directive, e.g:
+```
+  cellSelectionInfo = new CellSelectionInfo();
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  columns = [];
+
+  data = [];
+```
+and in component `.html`,
+Set these three properties to the table, e.g:
+```
+  <table tabindex="-1" hidefocus="true" [ngxCellSelectable]="cellSelectionInfo" [data]="data"
+  [columns]="columns">
+  ...
+  </table>
+```
+Tip: In order for the table to be focused, it is also necessary to add the attribute `tabindex="-1" hidefocus="true"` to the table tag.
+
+The next step is to use `*ngFor` to loop table columns and table data, set the ID of td according to the row index and column index(It's important!), e.g:`[id]="rowIndex + '-' + colIndex"`, and use `ngClass` in td to set the class to use when the cell is selected, e.g:
+```
+  <tr>
+    <th *ngFor="let c of columns" width="200px">{{ c.title }}</th>
+  </tr>
+  <tr *ngFor="let item of data; let rowIndex = index" class="disable-select">
+    <td *ngFor="let c of columns; let colIndex = index" 
+    [id]="rowIndex + '-' + colIndex" 
+    [ngClass]="{'eng-selected-cell': cellSelectionInfo.selectionSet.has(rowIndex + '-' + colIndex)}">{{ item[c.binding] }}</td>
+  </tr>
+```
+Finally, through cellSelectionInfo to get the selected relevant information, including how many items are selected, the average, and summary. In cellSelectionInfo.selection, you can get the id and value of the selected item (from data), e.g:
+```
+<div *ngIf="cellSelectionInfo.agg.cnt > 1; else cntAll">
+        cntAll: <span>{{ cellSelectionInfo.agg.cntAll }}</span>;
+        avg: <span >{{ cellSelectionInfo.agg.avg | number: '1.0-2' }}</span>;
+        sum: <span>{{ cellSelectionInfo.agg.sum | number: '1.0-2' }}</span>;
+</div>
+<ng-template #cntAll>
+    cntAll: <span>{{ cellSelectionInfo.agg.cntAll | number: '1.0-2' }}</span> 
+</ng-template>
+```
+## License
+MIT

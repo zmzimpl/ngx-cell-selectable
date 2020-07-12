@@ -6,7 +6,7 @@
     "ngcc": "ngcc",
     "start": "ng serve",
     "build": "ng build ngx-cell-selectable --prod && cd dist/ngx-cell-selectable && npm pack",
-    "publish": "cd dist/ngx-cell-selectable && npm publish --access=public",
+    "publish": "cd dist/ngx-cell-selectable && nrm publish --access=public",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
