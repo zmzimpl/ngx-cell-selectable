@@ -1,6 +1,6 @@
 # ngx-cell-selectable
 
-An Angular directive makes table cells selectable and copyable.
+An Angular directive makes table cells selectable and copyable.[demo](https://stackblitz.com/edit/angular-ivy-csqbzv)
 
 ## Install
 
