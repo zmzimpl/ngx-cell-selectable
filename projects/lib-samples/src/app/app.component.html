@@ -1,0 +1,22 @@
+<nz-layout class="inner-layout">
+  <nz-sider nzWidth="200px" nzTheme="light">
+    <ul nz-menu nzMode="inline" class="sider-menu">
+      <li nz-submenu nzOpen nzTitle="Cell Selectable" nzIcon="table">
+        <ul>
+          <li nz-menu-item routerLink="/cell-selectable/antd-table">Antd Table</li>
+        </ul>
+      </li>
+      <!-- <li nz-submenu nzTitle="subnav 2" nzIcon="laptop">
+        <ul>
+          <li nz-menu-item>option5</li>
+          <li nz-menu-item>option6</li>
+          <li nz-menu-item>option7</li>
+          <li nz-menu-item>option8</li>
+        </ul>
+      </li> -->
+    </ul>
+  </nz-sider>
+  <nz-content class="inner-content">
+    <router-outlet></router-outlet>
+  </nz-content>
+</nz-layout>

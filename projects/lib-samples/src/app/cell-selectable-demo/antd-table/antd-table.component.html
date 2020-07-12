@@ -1,0 +1,27 @@
+<nz-table
+      #virtualTable
+      tabindex="-1" 
+      hidefocus="true" 
+      [ngxCellSelectable]="cellSelectionInfo"
+      [data]="listOfData"
+      [columns]="columns"
+      [nzVirtualItemSize]="54"
+      [nzData]="listOfData"
+      [nzVirtualForTrackBy]="trackByIndex"
+      [nzFrontPagination]="false"
+      [nzShowPagination]="false"
+      [nzScroll]="{ x: '1200px', y: '240px' }"
+    >
+      <thead>
+        <tr>
+          <th *ngFor="let c of columns"> {{ c.binding }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-template nz-virtual-scroll let-data let-index="index">
+          <tr class="disable-select">
+            <td *ngFor="let c of columns; let cIndex = index" [id]="index + '-' + cIndex" [ngClass]="{'eng-selected-cell': cellSelectionInfo.selectionSet.has(index + '-' + cIndex)}">{{ data[c.binding] }}</td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </nz-table>
