@@ -1,0 +1,29 @@
+<div style="height: 90%; overflow: auto;">
+    <table border="1" tabindex="-1" hidefocus="true" [ngxCellSelectable]="cellSelectionInfo" [data]="data"
+    [columns]="columns">
+        <tr>
+          <th *ngFor="let c of columns" width="200px">{{ c.title }}</th>
+        </tr>
+        <tr *ngFor="let item of data; let rowIndex = index" class="disable-select">
+          <td *ngFor="let c of columns; let colIndex = index" 
+          [id]="rowIndex + '-' + colIndex" 
+          [ngClass]="{'eng-selected-cell': cellSelectionInfo.selectionSet.has(rowIndex + '-' + colIndex)}">{{ item[c.binding] }}</td>
+        </tr>
+    </table>
+</div>
+
+
+<div nz-row nzGutter="16" *ngIf="cellSelectionInfo.agg.cnt > 1; else cntAll">
+    <div nz-col>
+        cntAll: <span>{{ cellSelectionInfo.agg.cntAll }}</span>;
+    </div>
+    <div nz-col>
+        avg: <span >{{ cellSelectionInfo.agg.avg | number: '1.0-2' }}</span>;
+    </div>
+    <div nz-col>
+        sum: <span>{{ cellSelectionInfo.agg.sum | number: '1.0-2' }}</span>;
+    </div>
+</div>
+<ng-template #cntAll>
+    cntAll: <span class="font-weight-bold">{{ cellSelectionInfo.agg.cntAll | number: '1.0-2' }}</span> 
+</ng-template>
