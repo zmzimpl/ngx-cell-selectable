@@ -16,9 +16,6 @@
       "dom"
     ],
     "paths": {
-      "ngx-cell-selectable": [
-       "projects/ngx-cell-selectable/src/public-api.ts"
-      ]
     }
   },
   "angularCompilerOptions": {

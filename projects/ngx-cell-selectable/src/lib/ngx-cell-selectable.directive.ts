@@ -1,6 +1,5 @@
 	
-import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
-import { CellSelectionInfo } from 'ngx-cell-selectable';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
 
 @Directive({
@@ -161,4 +160,18 @@ export class NgxCellSelectableDirective {
     }
   }
 
+}
+
+
+export class CellSelectionInfo {
+  initialStartId = '';
+  dragging = false;
+  selection: {id: string, value: string}[] = [];
+  selectionSet: Set<any> = new Set<any>();
+  startEl: HTMLTableDataCellElement = null;
+  start: { id: string } = {
+    id: ''
+  };
+  endEl: HTMLTableDataCellElement = null;
+  agg = { cnt: 0, cntAll: 0, sum: 0, avg: 0 };
 }

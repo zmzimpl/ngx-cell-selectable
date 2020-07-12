@@ -3,5 +3,8 @@
   "dest": "../../dist/ngx-cell-selectable",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "ngx-clipboard"
+  ]
 }
