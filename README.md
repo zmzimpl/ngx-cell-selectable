@@ -88,3 +88,5 @@ Finally, through cellSelectionInfo to get the selected relevant information, inc
     cntAll: <span>{{ cellSelectionInfo.agg.cntAll | number: '1.0-2' }}</span> 
 </ng-template>
 ```
+## License
+MIT
