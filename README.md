@@ -74,9 +74,9 @@ Set these four properties to the table, e.g:
   ...
   </table>
 ```
-Tip: In order for the table to be focused, it is also necessary to add the attribute `tabindex="-1" hidefocus="true"` to the table tag.
+**Tip**: In order for the table to be focused, it is also necessary to add the attribute `tabindex="-1" hidefocus="true"` to the table tag.
 
-The next step is to use `*ngFor` to loop table columns and table data, set the ID of td according to the row index and column index(It's important!), e.g:`[id]="rowIndex + '-' + colIndex"`, and use `ngClass` in td to set the class to use when the cell is selected, e.g:
+The next step is to use `*ngFor` to loop table columns and table data, set the ID of td according to the row index and column index(**It's important!**), e.g:`[id]="rowIndex + '-' + colIndex"`, and use `ngClass` in td to set the class to use when the cell is selected, e.g:
 ```
   <tr>
     <th *ngFor="let c of columns" width="200px">{{ c.title }}</th>
@@ -87,7 +87,7 @@ The next step is to use `*ngFor` to loop table columns and table data, set the I
     [ngClass]="{'eng-selected-cell': cellSelectionInfo.selectionSet.has(rowIndex + '-' + colIndex)}">{{ item[c.binding] }}</td>
   </tr>
 ```
-Finally, through cellSelectionInfo to get the selected relevant information, including how many items are selected, the average, and summary. In cellSelectionInfo.selection, you can get the id and value of the selected item (from data), e.g:
+Finally, through **cellSelectionInfo** to get the selected relevant information, including how many items are selected, the average, and summary. In **cellSelectionInfo.selection**, you can get the id and value of the selected item (from data), e.g:
 ```
 <div *ngIf="cellSelectionInfo.agg.cnt > 1; else cntAll">
         cntAll: <span>{{ cellSelectionInfo.agg.cntAll }}</span>;
