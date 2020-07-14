@@ -7,14 +7,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxCellSelectableModule } from 'ngx-cell-selectable';
 import { BasicTableComponent } from './basic-table/basic-table.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { PrimengTableComponent } from './primeng-table/primeng-table.component';
+import {TableModule} from 'primeng/table';
+
 const ZORROModule = [
   NzTableModule,
-  NzGridModule
+  NzGridModule,
+  TableModule
 ];
 
 
 @NgModule({
-  declarations: [AntdTableComponent, BasicTableComponent],
+  declarations: [AntdTableComponent, BasicTableComponent, PrimengTableComponent],
   imports: [
     CommonModule,
     HttpClientModule,

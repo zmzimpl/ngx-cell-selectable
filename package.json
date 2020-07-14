@@ -23,6 +23,7 @@
     "@angular/router": "~9.1.3",
     "ng-zorro-antd": "^9.1.2",
     "ngx-cell-selectable": "^1.0.3",
+    "primeng": "^9.1.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
