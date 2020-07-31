@@ -1,5 +1,6 @@
 <div style="height: 90%; overflow: auto;">
-    <table border="1" tabindex="-1" hidefocus="true" [ngxCellSelectable]="cellSelectionInfo" [data]="data" [valueProp]="'binding'"
+    <table border="1" tabindex="-1" hidefocus="true" [ngxCellSelectable]="cellSelectionInfo" (copy)="copy($event)"
+    (cellSelectionInfoChange)="cellSelectionInfoChange($event)" [data]="data" [valueProp]="'binding'"
     [columns]="columns">
         <tr>
           <th *ngFor="let c of columns" width="200px">{{ c.title }}</th>

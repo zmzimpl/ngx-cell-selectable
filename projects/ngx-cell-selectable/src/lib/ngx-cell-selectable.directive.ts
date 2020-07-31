@@ -1,6 +1,7 @@
 	
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { ClipboardService } from 'ngx-clipboard';
+import { DOCUMENT } from '@angular/common';
 
 @Directive({
   selector: '[ngxCellSelectable]'
@@ -19,11 +20,15 @@ export class NgxCellSelectableDirective {
 
   @Input() valueProp = 'binding';
 
+  @Output() cellSelectionInfoChange: EventEmitter<CellSelectionInfo> = new EventEmitter();
+
+  @Output() copy: EventEmitter<string> = new EventEmitter();
+
   cls = 'eng-selected-cell';
 
   constructor(
+    @Inject(DOCUMENT) private dom: any,
     private tableRef: ElementRef,
-    private clipBoardService: ClipboardService
   ) {
     setTimeout(() => {
       if (this.cellSelectionInfo) {
@@ -44,11 +49,28 @@ export class NgxCellSelectableDirective {
               data.splice(insertIndex, 0, '\n');
               insertCount++;
             }
-            this.clipBoardService.copyFromContent(' ' + data.join(' '));
+            this._copy(' ' + data.join(' '));
           }
       });
       }
     }, 0);
+  }
+
+  private _copy(value: string) {
+    let copyTextArea = (null as any) as HTMLTextAreaElement; // tslint:disable-line:no-any
+      try {
+        copyTextArea = this.dom.createElement('textarea');
+        copyTextArea.style.height = '0px';
+        copyTextArea.style.opacity = '0';
+        copyTextArea.style.width = '0px';
+        this.dom.body.appendChild(copyTextArea);
+        copyTextArea.value = value;
+        copyTextArea.select();
+        this.dom.execCommand('copy');
+        this.copy.emit(value);
+      } catch {
+        console.error('failed to copy');
+      }
   }
   /**
    * 鼠标的松开事件
@@ -56,6 +78,7 @@ export class NgxCellSelectableDirective {
   mouseUp() {
     this.cellSelectionInfo.dragging = false;
     this.cellSelectionInfo.initialStartId = undefined;
+    this.cellSelectionInfoChange.emit(this.cellSelectionInfo);
   }
 
   setStartCell(el: HTMLTableCellElement) {
@@ -107,7 +130,13 @@ export class NgxCellSelectableDirective {
         if (!this.cellSelectionInfo.selectionSet.has(i + '-' + j)) {
           let value = '';
           value = this.data[i][this.columns[j][this.valueProp]];
-          this.cellSelectionInfo.selection.push({id: i + '-' + j, value});
+          this.cellSelectionInfo.selection.push({
+            id: i + '-' + j,
+            value,
+            row: this.data[i],
+            rowIndex: i,
+            column: this.columns[j]
+          });
           this.cellSelectionInfo.selectionSet.add(i + '-' + j);
         }
       }
@@ -168,7 +197,7 @@ export class NgxCellSelectableDirective {
 export class CellSelectionInfo {
   initialStartId = '';
   dragging = false;
-  selection: {id: string, value: string}[] = [];
+  selection: { id: string, value: string, row: any, rowIndex: number, column: any }[] = [];
   selectionSet: Set<any> = new Set<any>();
   startEl: HTMLTableDataCellElement = null;
   start: { id: string } = {

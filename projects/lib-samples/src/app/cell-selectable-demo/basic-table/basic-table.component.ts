@@ -23,4 +23,12 @@ export class BasicTableComponent implements OnInit {
     this.data = this.tableDataService.getTableData();
   }
 
+  cellSelectionInfoChange(evt: CellSelectionInfo) {
+    console.log(evt);
+  }
+
+  copy(evt: any) {
+    console.log(evt);
+  }
+
 }

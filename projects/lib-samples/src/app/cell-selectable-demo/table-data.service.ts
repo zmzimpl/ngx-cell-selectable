@@ -9,7 +9,7 @@ export class TableDataService {
 
     getTableColumns(): any[] {
         return [
-            { binding: 'index', title: 'name' },
+            { binding: 'index', title: 'index' },
             { binding: 'name', title: 'name' },
             { binding: 'age', title: 'age' },
             { binding: 'address', title: 'address' },
