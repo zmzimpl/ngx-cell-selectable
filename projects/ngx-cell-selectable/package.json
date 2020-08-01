@@ -1,7 +1,7 @@
 {
   "name": "ngx-cell-selectable",
   "description": "An Angular directive makes table cells selectable and copyable.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "MIT",
   "private": false,
   "keywords": ["cell selectable", "ngx-cell-selectable"],
