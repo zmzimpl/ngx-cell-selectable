@@ -22,17 +22,6 @@ imports: [
 ]
 ```
 
-## Input & Output
-
-Properties | Description | Value
-:----------- | :----------- | :-----------
-[ngxCellSelectable]         | The attribute that controls whether the cell can be selected. If you want to enable the selected cell function, pass in `CellSelectionInfo`, otherwise, pass in `false` to close the selectable function        | `CellSelectionInfo` or `false`
-[data]                      | Table data Array                          | any[]
-[columns]                   | Table Column Array                    | any[]
-[valueProp]                 | The attribute name corresponding to the value to be selected in the column object | string
-(cellSelectionInfoChange)   | After cellSelectionInfo Changed       | `EventEmitter<CellSelectionInfo>`
-(copy)                      | After copied                          | `EventEmitter<string>`
-
 ## Usage
 
 
@@ -98,6 +87,7 @@ The next step is to use `*ngFor` to loop table columns and table data, set the I
     [ngClass]="{'eng-selected-cell': cellSelectionInfo.selectionSet.has(rowIndex + '-' + colIndex)}">{{ item[c.binding] }}</td>
   </tr>
 ```
+
 Finally, through **cellSelectionInfo** to get the selected relevant information, including how many items are selected, the average, and summary. In **cellSelectionInfo.selection**, you can get the id and value of the selected item (from data), e.g:
 ```
 <div *ngIf="cellSelectionInfo.agg.cnt > 1; else cntAll">
@@ -109,5 +99,15 @@ Finally, through **cellSelectionInfo** to get the selected relevant information,
     cntAll: <span>{{ cellSelectionInfo.agg.cntAll | number: '1.0-2' }}</span> 
 </ng-template>
 ```
+## Input & Output
+
+Properties | Description | Value
+:----------- | :----------- | :-----------
+[ngxCellSelectable]         | The attribute that controls whether the cell can be selected. If you want to enable the selected cell function, pass in `CellSelectionInfo`, otherwise, pass in `false` to close the selectable function        | `CellSelectionInfo` or `false`
+[data]                      | Table data Array                          | any[]
+[columns]                   | Table Column Array                    | any[]
+[valueProp]                 | The attribute name corresponding to the value to be selected in the column object | string
+(cellSelectionInfoChange)   | After cellSelectionInfo Changed       | `EventEmitter<CellSelectionInfo>`
+(copy)                      | After copied                          | `EventEmitter<string>`
 ## License
 MIT
