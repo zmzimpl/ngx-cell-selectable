@@ -1,6 +1,5 @@
 	
 import { Directive, ElementRef, HostListener, Input, Output, EventEmitter, Inject } from '@angular/core';
-import { ClipboardService } from 'ngx-clipboard';
 import { DOCUMENT } from '@angular/common';
 
 @Directive({
