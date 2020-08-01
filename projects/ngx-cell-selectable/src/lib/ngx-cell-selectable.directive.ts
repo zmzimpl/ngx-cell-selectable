@@ -62,6 +62,8 @@ export class NgxCellSelectableDirective {
         copyTextArea.style.height = '0px';
         copyTextArea.style.opacity = '0';
         copyTextArea.style.width = '0px';
+        copyTextArea.style.position = 'absolute';
+        copyTextArea.style.zIndex = '-1';
         this.dom.body.appendChild(copyTextArea);
         copyTextArea.value = value;
         copyTextArea.select();
@@ -69,6 +71,10 @@ export class NgxCellSelectableDirective {
         this.copy.emit(value);
       } catch {
         console.error('failed to copy');
+      } finally {
+        if (copyTextArea && copyTextArea.parentNode) {
+          copyTextArea.parentNode.removeChild(copyTextArea);
+        }
       }
   }
   /**
