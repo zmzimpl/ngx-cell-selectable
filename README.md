@@ -22,6 +22,17 @@ imports: [
 ]
 ```
 
+## Input & Output
+
+Properties | Description | Value
+:----------- | :----------- | :-----------
+[ngxCellSelectable]         | The attribute that controls whether the cell can be selected. If you want to enable the selected cell function, pass in `CellSelectionInfo`, otherwise, pass in `false` to close the selectable function        | `CellSelectionInfo` or `false`
+[data]                      | Table data Array                          | any[]
+[columns]                   | Table Column Array                    | any[]
+[valueProp]                 | The attribute name corresponding to the value to be selected in the column object | string
+(cellSelectionInfoChange)   | After cellSelectionInfo Changed       | `EventEmitter<CellSelectionInfo>`
+(copy)                      | After copied                          | `EventEmitter<string>`
+
 ## Usage
 
 
