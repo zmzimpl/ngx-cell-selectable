@@ -23,8 +23,6 @@ export class NgxCellSelectableDirective {
 
   @Output() copy: EventEmitter<string> = new EventEmitter();
 
-  cls = 'eng-selected-cell';
-
   constructor(
     @Inject(DOCUMENT) private dom: any,
     private tableRef: ElementRef,
@@ -56,7 +54,7 @@ export class NgxCellSelectableDirective {
   }
 
   private _copy(value: string) {
-    let copyTextArea = (null as any) as HTMLTextAreaElement; // tslint:disable-line:no-any
+    let copyTextArea = (null as any) as HTMLTextAreaElement;
       try {
         copyTextArea = this.dom.createElement('textarea');
         copyTextArea.style.height = '0px';

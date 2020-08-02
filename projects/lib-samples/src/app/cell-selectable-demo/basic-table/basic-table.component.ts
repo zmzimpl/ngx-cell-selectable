@@ -27,6 +27,11 @@ export class BasicTableComponent implements OnInit {
     console.log(evt);
   }
 
+  clearSelection() {
+    this.cellSelectionInfo.selection = [];
+    this.cellSelectionInfo.selectionSet.clear();
+  }
+
   copy(evt: any) {
     console.log(evt);
   }
